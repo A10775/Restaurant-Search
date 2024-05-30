@@ -31,6 +31,7 @@ app.post('/search', async (req, res) => {
         });
 
         const restaurants = response.data.results.shop;
+        console.log(response)
         res.render('results', { restaurants });
     } catch (error) {
         console.error(error);
