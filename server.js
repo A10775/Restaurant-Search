@@ -31,8 +31,27 @@ app.post('/search', async (req, res) => {
         });
 
         const restaurants = response.data.results.shop;
-        console.log(response)
         res.render('results', { restaurants });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('エラーが発生しました。');
+    }
+});
+
+app.get('/details/:id', async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        const response = await axios.get('http://webservice.recruit.co.jp/hotpepper/gourmet/v1/', {
+            params: {
+                key: API_KEY,
+                id: id,
+                format: 'json'
+            }
+        });
+
+        const restaurant = response.data.results.shop[0];
+        res.render('details', { restaurant });
     } catch (error) {
         console.error(error);
         res.status(500).send('エラーが発生しました。');
