@@ -74,3 +74,15 @@ img {
     display: block;
     margin-top: 10px;
 }
+
+a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

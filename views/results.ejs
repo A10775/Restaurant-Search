@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>レストラン検索結果</title>
+    <title>検索結果</title>
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
@@ -12,7 +12,7 @@
         <ul>
             <% restaurants.forEach(function(restaurant) { %>
                 <li>
-                    <h2><%= restaurant.name %></h2>
+                    <h2><a href="/details/<%= restaurant.id %>"><%= restaurant.name %></a></h2>
                     <p><%= restaurant.address %></p>
                     <img src="<%= restaurant.photo.pc.l %>" alt="<%= restaurant.name %>">
                 </li>

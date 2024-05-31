@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= restaurant.name %></title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <h1><%= restaurant.name %></h1>
+    <div class="container">
+        <p><strong>住所:</strong> <%= restaurant.address %></p>
+        <p><strong>営業時間:</strong> <%= restaurant.open %></p>
+        <img src="<%= restaurant.photo.pc.l %>" alt="<%= restaurant.name %>">
+    </div>
+    <a href="/">戻る</a>
+</body>
+</html>
