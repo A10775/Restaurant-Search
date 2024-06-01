@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>検索結果</title>
+    <title>レストラン検索結果 | グルメサーチ</title>
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
@@ -25,11 +25,25 @@
         <% } %>
 
         <div class="pagination">
+            <% const totalPages = Math.ceil(totalResults / pageSize); %>
             <% if (currentPage > 1) { %>
-                <a class="page-link" href="/results?page=<%= currentPage - 1 %>">前のページ</a>
+                <a class="page-link" href="/results?page=<%= currentPage - 1 %>"><</a>
             <% } %>
-            <% if (totalResults > currentPage * pageSize) { %>
-                <a class="page-link" href="/results?page=<%= currentPage + 1 %>">次のページ</a>
+
+            <% for (let i = 1; i <= totalPages; i++) { %>
+                <% if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) { %>
+                    <% if (i === currentPage) { %>
+                        <span class="current-page"><%= i %></span>
+                    <% } else { %>
+                        <a class="page-link" href="/results?page=<%= i %>"><%= i %></a>
+                    <% } %>
+                <% } else if (i === currentPage - 2 || i === currentPage + 2) { %>
+                    <span>...</span>
+                <% } %>
+            <% } %>
+
+            <% if (currentPage < totalPages) { %>
+                <a class="page-link" href="/results?page=<%= currentPage + 1 %>">></a>
             <% } %>
         </div>
     </div>
