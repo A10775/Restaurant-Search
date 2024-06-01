@@ -10,15 +10,28 @@
     <h1>検索結果</h1>
     <div class="container">
         <ul>
-            <% restaurants.forEach(function(restaurant) { %>
-                <li>
-                    <h2><a href="/details/<%= restaurant.id %>"><%= restaurant.name %></a></h2>
-                    <p><%= restaurant.address %></p>
-                    <img src="<%= restaurant.photo.pc.l %>" alt="<%= restaurant.name %>">
-                </li>
-            <% }); %>
+            <% if (restaurants.length > 0) { %>
+                <% restaurants.forEach(function(restaurant) { %>
+                    <li>
+                        <h2><a href="/details/<%= restaurant.id %>"><%= restaurant.name %></a></h2>
+                        <p>交通アクセス：<%= restaurant.access %></p>
+                        <img src="<%= restaurant.photo.pc.l %>" alt="<%= restaurant.name %>">
+                    </li>
+                <% }); %>
+            <% } else { %>
+                <p>半径<%= radius %>km以内にレストランはありませんでした。</p>
+            <% } %>
         </ul>
+
+        <div class="pagination">
+            <% if (currentPage > 1) { %>
+                <a class="page-link" href="/results?page=<%= currentPage - 1 %>">前のページ</a>
+            <% } %>
+            <% if (totalResults > currentPage * pageSize) { %>
+                <a class="page-link" href="/results?page=<%= currentPage + 1 %>">次のページ</a>
+            <% } %>
+        </div>
     </div>
-    <a href="/">戻る</a>
+    <a href="/">検索条件入力画面に戻る</a>
 </body>
 </html>
