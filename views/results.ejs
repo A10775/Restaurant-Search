@@ -9,8 +9,9 @@
 <body>
     <h1>検索結果</h1>
     <div class="container">
-        <ul>
-            <% if (restaurants.length > 0) { %>
+        <% if (restaurants.length > 0) { %>
+            <p style="text-align: right;"><%= start %>～<%= end %> 件を表示 / 全 <%= totalResults %> 件</p>
+            <ul>
                 <% restaurants.forEach(function(restaurant) { %>
                     <li>
                         <h2><a href="/details/<%= restaurant.id %>"><%= restaurant.name %></a></h2>
@@ -18,10 +19,10 @@
                         <img src="<%= restaurant.photo.pc.l %>" alt="<%= restaurant.name %>">
                     </li>
                 <% }); %>
-            <% } else { %>
-                <p>半径<%= radius %>km以内にレストランはありませんでした。</p>
-            <% } %>
-        </ul>
+            </ul>
+        <% } else { %>
+            <p style="text-align: center;">半径<%= radius %>km以内にレストランはありませんでした。</p>
+        <% } %>
 
         <div class="pagination">
             <% if (currentPage > 1) { %>
