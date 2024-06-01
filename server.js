@@ -5,6 +5,9 @@ const axios = require('axios');
 const session = require('express-session');
 
 const app = express();
+const PAGE_SIZE = 10;
+const API_KEY = '7216a4ef61efbd95';
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -17,25 +20,21 @@ app.use(session({
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-const API_KEY = '7216a4ef61efbd95';
-
 app.get('/', (req, res) => {
     res.render('index');
 });
 
-app.post('/search', (req, res) => {
+app.post('/search', async (req, res) => {
     const { latitude, longitude, radius } = req.body;
-
-    req.session.searchParams = { latitude, longitude, radius }; // セッションに検索条件を保存
-    req.session.currentPage = 1; // 現在のページ番号を初期化
+    req.session.searchParams = { latitude, longitude, radius };
 
     res.redirect('/results');
 });
 
 app.get('/results', async (req, res) => {
     const { latitude, longitude, radius } = req.session.searchParams;
-    const currentPage = parseInt(req.query.page) || req.session.currentPage || 1;
-    const start = (currentPage - 1) * 10 + 1; // 1ページに10件表示する場合のオフセット
+    const currentPage = parseInt(req.query.page) || 1;
+    const start = (currentPage - 1) * PAGE_SIZE;
 
     try {
         const response = await axios.get('http://webservice.recruit.co.jp/hotpepper/gourmet/v1/', {
@@ -44,19 +43,22 @@ app.get('/results', async (req, res) => {
                 lat: latitude,
                 lng: longitude,
                 range: radius,
-                start: start,
+                start: start + 1,
+                count: PAGE_SIZE,
                 format: 'json'
             }
         });
 
-        const restaurants = response.data.results.shop;
         const totalResults = response.data.results.results_available;
-
+        const restaurants = response.data.results.shop;
         res.render('results', {
             restaurants,
             currentPage,
+            pageSize: PAGE_SIZE,
             totalResults,
-            pageSize: 10
+            start: start + 1,
+            end: start + restaurants.length,
+            radius
         });
     } catch (error) {
         console.error(error);
