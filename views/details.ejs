@@ -14,6 +14,6 @@
         <p><strong>定休日:</strong> <%= restaurant.close %></p>
         <img src="<%= restaurant.photo.pc.l %>" alt="<%= restaurant.name %>">
     </div>
-    <a href="/results">戻る</a>
+    <a href="/results?page=<%= page %>">戻る</a>
 </body>
 </html>
