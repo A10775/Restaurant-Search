@@ -9,43 +9,41 @@
 <body>
     <h1>検索結果</h1>
     <div class="container">
-        <% if (restaurants.length > 0) { %>
-            <p style="text-align: right;"><%= start %>～<%= end %> 件を表示 / 全 <%= totalResults %> 件</p>
+        <% if (restaurants.length === 0) { %>
+            <p style="text-align: center;">半径<%= radius %>km以内にレストランはありませんでした。</p>
+        <% } else { %>
+            <p style="text-align: right;"><%= (currentPage - 1) * perPage + 1 %>～<%= Math.min(currentPage * perPage, totalResults) %> 件を表示 / 全 <%= totalResults %> 件</p>
             <ul>
                 <% restaurants.forEach(function(restaurant) { %>
                     <li>
-                        <h2><a href="/details/<%= restaurant.id %>"><%= restaurant.name %></a></h2>
+                        <h2><a href="/details/<%= restaurant.id %>?page=<%= currentPage %>"><%= restaurant.name %></a></h2>
                         <p>交通アクセス：<%= restaurant.access %></p>
                         <img src="<%= restaurant.photo.pc.l %>" alt="<%= restaurant.name %>">
                     </li>
                 <% }); %>
             </ul>
-        <% } else { %>
-            <p style="text-align: center;">半径<%= radius %>km以内にレストランはありませんでした。</p>
+        <% } %>
+    </div>
+    <div class="pagination">
+        <% if (currentPage > 1) { %>
+            <a class="page-link" href="/results?page=<%= currentPage - 1 %>">前のページ</a>
         <% } %>
 
-        <div class="pagination">
-            <% const totalPages = Math.ceil(totalResults / pageSize); %>
-            <% if (currentPage > 1) { %>
-                <a class="page-link" href="/results?page=<%= currentPage - 1 %>"><</a>
-            <% } %>
-
-            <% for (let i = 1; i <= totalPages; i++) { %>
-                <% if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) { %>
-                    <% if (i === currentPage) { %>
-                        <span class="current-page"><%= i %></span>
-                    <% } else { %>
-                        <a class="page-link" href="/results?page=<%= i %>"><%= i %></a>
-                    <% } %>
-                <% } else if (i === currentPage - 2 || i === currentPage + 2) { %>
-                    <span>...</span>
+        <% for (let i = 1; i <= totalPages; i++) { %>
+            <% if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) { %>
+                <% if (i === currentPage) { %>
+                    <span class="current-page"><%= i %></span>
+                <% } else { %>
+                    <a class="page-link" href="/results?page=<%= i %>"><%= i %></a>
                 <% } %>
+            <% } else if (i === currentPage - 2 || i === currentPage + 2) { %>
+                <span>...</span>
             <% } %>
+        <% } %>
 
-            <% if (currentPage < totalPages) { %>
-                <a class="page-link" href="/results?page=<%= currentPage + 1 %>">></a>
-            <% } %>
-        </div>
+        <% if (currentPage < totalPages) { %>
+            <a class="page-link" href="/results?page=<%= currentPage + 1 %>">次のページ</a>
+        <% } %>
     </div>
     <a href="/">検索条件入力画面に戻る</a>
 </body>
