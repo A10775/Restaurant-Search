@@ -12,6 +12,7 @@
         <p><strong>住所:</strong> <%= restaurant.address %></p>
         <p><strong>営業時間:</strong> <%= restaurant.open %></p>
         <p><strong>定休日:</strong> <%= restaurant.close %></p>
+        <p><strong>店舗URL:</strong> <a href="<%= restaurant.urls.pc %>" id="url"><%= restaurant.urls.pc %></a></p>
         <img src="<%= restaurant.photo.pc.l %>" alt="<%= restaurant.name %>">
     </div>
     <a href="/results?page=<%= page %>">戻る</a>
