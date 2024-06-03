@@ -87,6 +87,26 @@ a:hover {
     text-decoration: underline;
 }
 
+.restaurant-info {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.photo {
+    flex: 2;
+}
+
+.info {
+    flex: 3;
+    margin-top: 0px;
+    margin-left: 20px;
+}
+
+h4,p.info {
+    font-size: 90%;
+}
+
 .pagination {
     text-align: center;
     margin-top: 20px;
@@ -119,4 +139,37 @@ a:hover {
 
 a#url {
     display: inline;
+}
+
+.details_img img {
+    display: block;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+table td:first-child {
+    font-weight: bold;
+    width: 90px;
+}
+
+.title h1 {
+    margin-bottom: 30px;
+}
+
+.title p {
+    text-align: center;
+    font-size: 90%;
+    font-weight: bold;
+    margin-top: -20px;
+    margin-bottom: 20px;
 }

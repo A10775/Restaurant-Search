@@ -10,15 +10,23 @@
     <h1>検索結果</h1>
     <div class="container">
         <% if (restaurants.length === 0) { %>
-            <p style="text-align: center;">半径<%= radius %>km以内にレストランはありませんでした。</p>
+            <p style="text-align: center;">半径<%= radius %>km以内にレストランは見つかりませんでした。</p>
         <% } else { %>
             <p style="text-align: right;"><%= (currentPage - 1) * perPage + 1 %>～<%= Math.min(currentPage * perPage, totalResults) %> 件を表示 / 全 <%= totalResults %> 件</p>
             <ul>
                 <% restaurants.forEach(function(restaurant) { %>
                     <li>
                         <h2><a href="/details/<%= restaurant.id %>?page=<%= currentPage %>"><%= restaurant.name %></a></h2>
-                        <p>交通アクセス：<%= restaurant.access %></p>
-                        <img src="<%= restaurant.photo.pc.l %>" alt="<%= restaurant.name %>">
+                        <div class="restaurant-info">
+                            <div class="photo">
+                                <img src="<%= restaurant.photo.pc.l %>" alt="<%= restaurant.name %>">
+                            </div>
+                            <div class="info">
+                                <h4>◆ <%= restaurant.genre.name %></h4>
+                                <h4>◆ <%= restaurant.genre.catch %></h4>
+                                <p>◆ <%= restaurant.access %></p>
+                            </div>
+                        </div>
                     </li>
                 <% }); %>
             </ul>

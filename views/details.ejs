@@ -7,13 +7,35 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <h1><%= restaurant.name %></h1>
+    <h1>店舗情報</h1>
     <div class="container">
-        <p><strong>住所:</strong> <%= restaurant.address %></p>
-        <p><strong>営業時間:</strong> <%= restaurant.open %></p>
-        <p><strong>定休日:</strong> <%= restaurant.close %></p>
-        <p><strong>店舗URL:</strong> <a href="<%= restaurant.urls.pc %>" id="url"><%= restaurant.urls.pc %></a></p>
-        <img src="<%= restaurant.photo.pc.l %>" alt="<%= restaurant.name %>">
+        <div class="title">
+            <h1><%= restaurant.name %></h1>
+            <p><%= restaurant.catch %></p>
+        </div>
+        <div class="details_img">
+            <img src="<%= restaurant.photo.pc.l %>" alt="<%= restaurant.name %>">
+        </div>
+        <div class="details_info">
+            <table>
+                <tr>
+                    <td>住所</td>
+                    <td><%= restaurant.address %></td>
+                </tr>
+                <tr>
+                    <td>営業時間</td>
+                    <td><%= restaurant.open %></td>
+                </tr>
+                <tr>
+                    <td>定休日</td>
+                    <td><%= restaurant.close %></td>
+                </tr>
+                <tr>
+                    <td>店舗URL</td>
+                    <td><a href="<%= restaurant.urls.pc %>" id="url"><%= restaurant.urls.pc %></a></td>
+                </tr>
+            </table>
+        </div>
     </div>
     <a href="/results?page=<%= page %>">戻る</a>
 </body>
