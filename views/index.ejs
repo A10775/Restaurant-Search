@@ -11,14 +11,32 @@
     <div class="container">
         <form id="searchForm" method="post" action="/search">
             <div class="form-group">
-                <label for="radius">検索半径 (km):</label>
-                <input type="number" id="radius" name="radius" required min="1" max="5" step="1" placeholder="1(km) ~ 5(km)の範囲で入力してください。">
+                <div class="form-group-item">
+                    <label for="keyword">キーワード:</label>
+                </div>
+                <div class="form-group-item">
+                    <input type="text" id="keyword" name="keyword" style="font-size: 90%;" placeholder="キーワードを入力 (任意)">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-group-item">
+                    <label for="radius">検索半径:</label>
+                </div>
+                <div class="form-group-item">
+                    <select id="radius" name="radius" style="font-size: 90%;">
+                        <option value="1">300m</option>
+                        <option value="2">500m</option>
+                        <option value="3">1000m</option>
+                        <option value="4">2000m</option>
+                        <option value="5">3000m</option>
+                    </select>
+                </div>
             </div>
             <div class="form-group">
                 <input type="hidden" id="latitude" name="latitude">
                 <input type="hidden" id="longitude" name="longitude">
                 <button type="button" onclick="getCurrentLocation()">現在地で検索</button>
-            </div> 
+            </div>
         </form>
     </div>
 

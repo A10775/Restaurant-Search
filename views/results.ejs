@@ -10,9 +10,22 @@
     <h1>検索結果</h1>
     <div class="container">
         <% if (restaurants.length === 0) { %>
-            <p style="text-align: center;">半径<%= radius %>km以内にレストランは見つかりませんでした。</p>
+            <p style="text-align: center;">検索結果が見つかりませんでした。</p>
         <% } else { %>
-            <p style="text-align: right;"><%= (currentPage - 1) * perPage + 1 %>～<%= Math.min(currentPage * perPage, totalResults) %> 件を表示 / 全 <%= totalResults %> 件</p>
+            <div class="sort-hit">
+                <div class="sort-options" style="margin-bottom: -20px;">
+                    <form action="/results" method="get">
+                        <input type="hidden" name="keyword" value="<%= keyword %>">
+                        <select name="sort" id="sort" onchange="this.form.submit()" style="font-size: 90%;">
+                            <option value="distance_asc" <% if (sort === 'distance_asc') { %>selected<% } %>>距離が近い順</option>
+                            <option value="recommend" <% if (sort === 'recommend') { %>selected<% } %>>オススメ順</option>
+                        </select>
+                    </form>
+                </div>
+                <div class="hit-count" style="text-align: right;">
+                    <span style="text-align: right;"><%= (currentPage - 1) * perPage + 1 %>～<%= Math.min(currentPage * perPage, totalResults) %> 件を表示 / 全 <%= totalResults %> 件</span>
+                </div>
+            </div>
             <ul>
                 <% restaurants.forEach(function(restaurant) { %>
                     <li>
@@ -24,7 +37,7 @@
                             <div class="info">
                                 <h4>◆ <%= restaurant.genre.name %></h4>
                                 <h4>◆ <%= restaurant.genre.catch %></h4>
-                                <p>◆ <%= restaurant.access %></p>
+                                <h4>◆ <%= restaurant.mobile_access %></h4>
                             </div>
                         </div>
                     </li>
@@ -34,7 +47,7 @@
     </div>
     <div class="pagination">
         <% if (currentPage > 1) { %>
-            <a class="page-link" href="/results?page=<%= currentPage - 1 %>">前のページ</a>
+            <a class="page-link" href="/results?page=<%= currentPage - 1 %>&sort=<%= sort %>&keyword=<%= keyword %>">前のページ</a>
         <% } %>
 
         <% for (let i = 1; i <= totalPages; i++) { %>
@@ -42,7 +55,7 @@
                 <% if (i === currentPage) { %>
                     <span class="current-page"><%= i %></span>
                 <% } else { %>
-                    <a class="page-link" href="/results?page=<%= i %>"><%= i %></a>
+                    <a class="page-link" href="/results?page=<%= i %>&sort=<%= sort %>&keyword=<%= keyword %>"><%= i %></a>
                 <% } %>
             <% } else if (i === currentPage - 2 || i === currentPage + 2) { %>
                 <span>...</span>
@@ -50,7 +63,7 @@
         <% } %>
 
         <% if (currentPage < totalPages) { %>
-            <a class="page-link" href="/results?page=<%= currentPage + 1 %>">次のページ</a>
+            <a class="page-link" href="/results?page=<%= currentPage + 1 %>&sort=<%= sort %>&keyword=<%= keyword %>">次のページ</a>
         <% } %>
     </div>
     <a href="/">検索条件入力画面に戻る</a>

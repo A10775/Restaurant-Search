@@ -24,25 +24,31 @@ app.get('/', (req, res) => {
 });
 
 app.post('/search', async (req, res) => {
-    const { latitude, longitude, radius } = req.body;
+    const { latitude, longitude, radius, keyword } = req.body;
 
-    req.session.searchParams = { latitude, longitude, radius }; // セッションに検索条件を保存
+    req.session.searchParams = { latitude, longitude, radius, keyword };
 
     const perPage = 10;
     const page = req.query.page || 1;
+    const sort = req.query.sort || 'distance_asc';
+
+    const params = {
+        key: API_KEY,
+        lat: latitude,
+        lng: longitude,
+        range: radius,
+        format: 'json',
+        count: perPage,
+        start: (page - 1) * perPage + 1,
+        order: sort === 'recommend' ? 4 : 1 // オススメ順:4, 距離順:1
+    };
+
+    if (keyword) {
+        params.keyword = keyword;
+    }
 
     try {
-        const response = await axios.get('http://webservice.recruit.co.jp/hotpepper/gourmet/v1/', {
-            params: {
-                key: API_KEY,
-                lat: latitude,
-                lng: longitude,
-                range: radius,
-                format: 'json',
-                count: perPage,
-                start: (page - 1) * perPage + 1
-            }
-        });
+        const response = await axios.get('http://webservice.recruit.co.jp/hotpepper/gourmet/v1/', { params });
 
         const restaurants = response.data.results.shop;
         const totalResults = response.data.results.results_available;
@@ -54,7 +60,9 @@ app.post('/search', async (req, res) => {
             totalPages,
             totalResults,
             radius,
-            perPage
+            keyword,
+            perPage,
+            sort
         });
     } catch (error) {
         console.error(error);
@@ -64,7 +72,7 @@ app.post('/search', async (req, res) => {
 
 app.get('/details/:id', async (req, res) => {
     const id = req.params.id;
-    const page = req.query.page || 1; // 現在のページ番号を取得
+    const page = req.query.page || 1;
 
     try {
         const response = await axios.get('http://webservice.recruit.co.jp/hotpepper/gourmet/v1/', {
@@ -84,23 +92,29 @@ app.get('/details/:id', async (req, res) => {
 });
 
 app.get('/results', async (req, res) => {
-    const { latitude, longitude, radius } = req.session.searchParams;
+    const { latitude, longitude, radius, keyword } = req.session.searchParams;
 
     const perPage = 10;
     const page = req.query.page || 1;
+    const sort = req.query.sort || 'distance_asc';
+
+    const params = {
+        key: API_KEY,
+        lat: latitude,
+        lng: longitude,
+        range: radius,
+        format: 'json',
+        count: perPage,
+        start: (page - 1) * perPage + 1,
+        order: sort === 'recommend' ? 4 : 1 // オススメ順:4, 距離順:1
+    };
+
+    if (keyword) {
+        params.keyword = keyword;
+    }
 
     try {
-        const response = await axios.get('http://webservice.recruit.co.jp/hotpepper/gourmet/v1/', {
-            params: {
-                key: API_KEY,
-                lat: latitude,
-                lng: longitude,
-                range: radius,
-                format: 'json',
-                count: perPage,
-                start: (page - 1) * perPage + 1
-            }
-        });
+        const response = await axios.get('http://webservice.recruit.co.jp/hotpepper/gourmet/v1/', { params });
 
         const restaurants = response.data.results.shop;
         const totalResults = response.data.results.results_available;
@@ -112,7 +126,9 @@ app.get('/results', async (req, res) => {
             totalPages,
             totalResults,
             radius,
-            perPage
+            keyword,
+            perPage,
+            sort
         });
     } catch (error) {
         console.error(error);

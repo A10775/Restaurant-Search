@@ -18,7 +18,13 @@ h1 {
 }
 
 .form-group {
-    margin-bottom: 15px;
+    /* margin-bottom: 15px; */
+    overflow: hidden;
+}
+
+.form-group .form-group-item {
+    float: left;
+    padding: 10px;
 }
 
 label {
