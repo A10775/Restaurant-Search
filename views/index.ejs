@@ -7,23 +7,24 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <h1>レストラン検索</h1>
+    <h1>グルメサーチ</h1>
     <div class="container">
+        <h2>レストラン検索</h2>
         <form id="searchForm" method="post" action="/search">
             <div class="form-group">
                 <div class="form-group-item">
-                    <label for="keyword">キーワード:</label>
+                    <label for="keyword">キーワード：</label>
                 </div>
                 <div class="form-group-item">
-                    <input type="text" id="keyword" name="keyword" style="font-size: 90%;" placeholder="キーワードを入力 (任意)">
+                    <input type="text" id="keyword" name="keyword" placeholder="キーワードを入力 (任意)">
                 </div>
             </div>
             <div class="form-group">
                 <div class="form-group-item">
-                    <label for="radius">検索半径:</label>
+                    <label for="radius">検索半径：</label>
                 </div>
                 <div class="form-group-item">
-                    <select id="radius" name="radius" style="font-size: 90%;">
+                    <select id="radius" name="radius">
                         <option value="1">300m</option>
                         <option value="2">500m</option>
                         <option value="3">1000m</option>
@@ -38,6 +39,10 @@
                 <button type="button" onclick="getCurrentLocation()">現在地で検索</button>
             </div>
         </form>
+        <div class="credit">
+            <p class="tag">powered by</p>
+            <a href="https://webservice.recruit.co.jp/doc/hotpepper/reference.html"><img src="https://webservice.recruit.co.jp/common/images/logo_hotopepper_264x45.png"></img></a>
+        </div>
     </div>
 
     <script>
