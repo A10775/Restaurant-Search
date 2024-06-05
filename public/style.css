@@ -18,8 +18,12 @@ h1 {
 }
 
 .form-group {
-    /* margin-bottom: 15px; */
     overflow: hidden;
+}
+
+.form-group label {
+    display: inline-block;
+    min-width: 100px;
 }
 
 .form-group .form-group-item {
@@ -27,8 +31,22 @@ h1 {
     padding: 10px;
 }
 
+.credit p {
+    text-align: center;
+    color: gray;
+    margin-bottom: auto;
+    margin-top: 40px;
+}
+
+.credit a {
+    margin-top: -5px;
+}
+
+.credit img {
+    width: 170;
+}
+
 label {
-    display: block;
     margin-bottom: 5px;
 }
 
@@ -67,7 +85,9 @@ li {
 }
 
 h2 {
-    margin: 0;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 p {
@@ -77,8 +97,13 @@ p {
 img {
     max-width: 100%;
     height: auto;
-    display: block;
     margin-top: 10px;
+}
+
+select#radius {
+    margin: auto;
+    border-style: none;
+    font-size: 100%;
 }
 
 a {
