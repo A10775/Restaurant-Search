@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <h1>店舗情報</h1>
+    <header>
+        <a href="/"><img src="/logo.png" alt="グルメサーチ" width="300"></a>
+    </header>
     <div class="container">
         <div class="title">
             <h1><%= restaurant.name %></h1>
@@ -41,6 +43,11 @@
             </table>
         </div>
     </div>
-    <a href="/results?page=<%= page %>">戻る</a>
+    <div class="pagination">
+        <a class="page-link" href="/results?page=<%= page %>&sort=<%= sort %>">戻る</a>
+    </div>
+    <footer>
+        <a href="/"><img src="/logo.png" alt="グルメサーチ" width="150"></a>
+    </footer>
 </body>
 </html>

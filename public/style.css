@@ -2,10 +2,15 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
-    background-color: #f4f4f4;
+    background-color: #fff2e9;
 }
 
 h1 {
+    color: #444444;
+    text-align: center;
+}
+
+header, footer {
     text-align: center;
 }
 
@@ -22,6 +27,7 @@ h1 {
 }
 
 .form-group label {
+    color: #444444;
     display: inline-block;
     min-width: 100px;
 }
@@ -33,17 +39,12 @@ h1 {
 
 .credit p {
     text-align: center;
-    color: gray;
-    margin-bottom: auto;
+    color: #444444;
     margin-top: 40px;
 }
 
 .credit a {
     margin-top: -5px;
-}
-
-.credit img {
-    width: 170;
 }
 
 label {
@@ -60,7 +61,7 @@ input[type="number"], button {
 }
 
 button {
-    background-color: #007bff;
+    background-color: #DF6C31;
     color: white;
     border: none;
     cursor: pointer;
@@ -68,7 +69,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #F39800;
 }
 
 ul {
@@ -101,6 +102,7 @@ img {
 }
 
 select#radius {
+    color: #444444;
     margin: auto;
     border-style: none;
     font-size: 100%;
@@ -109,8 +111,7 @@ select#radius {
 a {
     display: block;
     text-align: center;
-    margin-top: 20px;
-    color: #007bff;
+    color: #DF6C31;
     text-decoration: none;
 }
 
@@ -134,8 +135,9 @@ a:hover {
     margin-left: 20px;
 }
 
-h4,p.info {
+h4, p.info {
     font-size: 90%;
+    color: #444444;
 }
 
 .pagination {
@@ -148,14 +150,15 @@ h4,p.info {
     margin: 0 5px;
     padding: 5px 10px;
     text-decoration: none;
-    color: #007bff;
-    border: 1px solid #007bff;
+    color: #DF6C31;
+    border: 1px solid #DF6C31;
     border-radius: 5px;
 }
 
 .page-link:hover {
-    background-color: #007bff;
+    background-color: #DF6C31;
     color: white;
+    text-decoration: none;
 }
 
 .current-page {
@@ -163,8 +166,8 @@ h4,p.info {
     margin: 0 5px;
     padding: 5px 10px;
     color: white;
-    background-color: #007bff;
-    border: 1px solid #007bff;
+    background-color: #DF6C31;
+    border: 1px solid #DF6C31;
     border-radius: 5px;
 }
 
@@ -179,6 +182,8 @@ a#url {
 }
 
 table {
+    margin-left: auto;
+    margin-right: auto;
     width: 100%;
     border-collapse: collapse;
 }
@@ -186,6 +191,15 @@ table {
 table td {
     padding: 10px;
     border: 1px solid #ccc;
+    color: #444444;
+}
+
+@media screen and (max-width: 768px) {
+    table td {
+        display: block;
+        width: 100% !important;
+        border-bottom: none;
+    }
 }
 
 table td:first-child {
@@ -199,8 +213,8 @@ table td:first-child {
 
 .title p {
     text-align: center;
+    color: #444444;
     font-size: 90%;
-    font-weight: bold;
     margin-top: -20px;
     margin-bottom: 20px;
 }
