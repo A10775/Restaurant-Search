@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const axios = require('axios');
 const session = require('express-session');
+const fs = require('fs');
+const https = require('https');
 const { exec } = require('child_process');
 
 const app = express();
@@ -49,7 +51,7 @@ app.post('/search', async (req, res) => {
     }
 
     try {
-        const response = await axios.get('http://webservice.recruit.co.jp/hotpepper/gourmet/v1/', { params });
+        const response = await axios.get('https://webservice.recruit.co.jp/hotpepper/gourmet/v1/', { params });
 
         const restaurants = response.data.results.shop;
         const totalResults = response.data.results.results_available;
@@ -95,7 +97,7 @@ app.get('/results', async (req, res) => {
     }
 
     try {
-        const response = await axios.get('http://webservice.recruit.co.jp/hotpepper/gourmet/v1/', { params });
+        const response = await axios.get('https://webservice.recruit.co.jp/hotpepper/gourmet/v1/', { params });
 
         const restaurants = response.data.results.shop;
         const totalResults = response.data.results.results_available;
@@ -123,7 +125,7 @@ app.get('/details/:id', async (req, res) => {
     const sort = req.session.sort || 'distance_asc';
 
     try {
-        const response = await axios.get('http://webservice.recruit.co.jp/hotpepper/gourmet/v1/', {
+        const response = await axios.get('https://webservice.recruit.co.jp/hotpepper/gourmet/v1/', {
             params: {
                 key: API_KEY,
                 id: id,
@@ -139,7 +141,12 @@ app.get('/details/:id', async (req, res) => {
     }
 });
 
-app.listen(3000, () => {
+const options = {
+    key: fs.readFileSync('server.key'),
+    cert: fs.readFileSync('server.crt')
+};
+
+https.createServer(options, app).listen(3000, () => {
     console.log('Server is running on port 3000');
-    exec('start http://localhost:3000');
+    exec('start https://localhost:3000');
 });
