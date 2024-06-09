@@ -3,8 +3,6 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const axios = require('axios');
 const session = require('express-session');
-const fs = require('fs');
-const https = require('https');
 const { exec } = require('child_process');
 
 const app = express();
@@ -28,6 +26,11 @@ app.get('/', (req, res) => {
 
 app.post('/search', async (req, res) => {
     const { latitude, longitude, radius, keyword } = req.body;
+
+    // 検索半径が選択されていない場合のエラーハンドリング
+    if (!radius) {
+        return res.status(400).send('検索半径を選択してください。');
+    }
 
     req.session.searchParams = { latitude, longitude, radius, keyword };
     req.session.sort = 'distance_asc';
@@ -141,12 +144,7 @@ app.get('/details/:id', async (req, res) => {
     }
 });
 
-const options = {
-    key: fs.readFileSync('server.key'),
-    cert: fs.readFileSync('server.crt')
-};
-
-https.createServer(options, app).listen(3000, () => {
+app.listen(3000, () => {
     console.log('Server is running on port 3000');
-    exec('start https://localhost:3000');
+    exec('start http://localhost:3000');
 });
