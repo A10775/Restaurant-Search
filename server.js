@@ -27,11 +27,6 @@ app.get('/', (req, res) => {
 app.post('/search', async (req, res) => {
     const { latitude, longitude, radius, keyword } = req.body;
 
-    // 検索半径が選択されていない場合のエラーハンドリング
-    if (!radius) {
-        return res.status(400).send('検索半径を選択してください。');
-    }
-
     req.session.searchParams = { latitude, longitude, radius, keyword };
     req.session.sort = 'distance_asc';
 
