@@ -6,7 +6,7 @@ Windows 11, GoogleChrome, Microsoft Edge（最新版）
 ## 動作方法
 1. リポジトリをクローン
 ```
-git clone https://github.com/A10775/Restaurant-Search.git
+git clone https://github.com/A10775/Restaurant-Search
 ```
 2. ディレクトリ移動
 ```
