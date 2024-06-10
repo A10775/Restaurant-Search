@@ -26,7 +26,7 @@ Microsoft VS Code
 ## 開発言語
 JavaScript
 ## フレームワーク
-Node.js Express
+Node.js Express (v20.13.1)
 ## 使用したAPI
 ・Geolocation API
 ・ホットペッパー グルメサーチAPI
