@@ -29,6 +29,7 @@ JavaScript
 Node.js Express (v20.13.1)
 ## 使用したAPI
 ・Geolocation API
+
 ・ホットペッパー グルメサーチAPI
 ## 開発期間
 10日間
